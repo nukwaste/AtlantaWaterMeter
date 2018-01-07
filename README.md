@@ -20,7 +20,7 @@ The goals of this project are:
 
 ## Requirements
 
-- Raspberry Pi 3 (Might work on others, only tested on the 3)
+- Raspberry Pi 3 and Raspberry Pi Zero WiFi (Might work on others)
 - [RTL-SDR](https://www.amazon.com/NooElec-NESDR-Mini-Compatible-Packages/dp/B009U7WZCA)
 - [Resin.io](https://resin.io) for deployment and installation to the Raspberry pi
 
@@ -39,9 +39,10 @@ You'll need to be able to do the following to get this to work:
 1. Install the image on the Raspberry Pi
 1. Plug in your RTL-SDR into the USB port on the Raspberry Pi
 1. `git push` this repository to your Resin application
-1. In Resin, view the logs on your device and find your meter ID. This is hardest part. You'll need to know your current reading to match it up to the meter ID. I've not found any correlation between what's written on the meter and the ID being sent out over the air.
+1. In Resin, view the "Logs" screen under the "Summary" Tab for your device and find your meter ID. This is hardest part. You'll need to know your current reading to match it up to the meter ID. I've not found any correlation between what's written on the meter and the ID being sent out over the air.
 1. Once you find your meter ID, enter it as an environment variable in the Resin dashboard under "METERID"
 1. At this point it's up to you as to where you want to 'send' the data. I log to a Google Spreadsheet and have provided instructions at the end of this README
+
 
 ## Logging to Google Spreadsheet
 
@@ -76,3 +77,13 @@ Here's the full breakdown:
         -  eg. "https://script.google.com/macros/s/RandomLookingScriptID/exec?value="
     - To test it you can send some data with 'curl: `curl -L https://script.google.com/macros/u/1/s/RandomLookingScriptID/exec?value=10`
 
+## Other Options
+
+Atlanta Gas Light - 
+Natural Gas Meters in downtown Atlanta
+
+You can read Atlanta Gas Light Meters by changing Line 33 in Daemon.sh 
+from 
+json=$(rtlamr -msgtype=r900 -filterid=$METERID -single=true -format=json)
+to 
+json=$(rtlamr -msgtype=scm -filterid=$METERID -single=true -format=json)
