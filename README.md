@@ -87,7 +87,8 @@ You can read Atlanta Gas Light Meters by changing Line 33 in **Daemon.sh**
 from 
 
 json=$(rtlamr -msgtype=r900 -filterid=$METERID -single=true -format=json)
- to 
+
+to 
  
 json=$(rtlamr -msgtype=scm -filterid=$METERID -single=true -format=json)
  
