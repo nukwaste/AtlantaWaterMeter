@@ -5,13 +5,15 @@ if [ -z "$METERID" ]; then
   echo "If you don't know your Meter's ID, you'll need to figure it out manually"
   echo "Easiest way is to go outside and read your meter, then match it to a meter id in the logs"
   echo "Note: It may take a several minutes to read all the nearby meters"
-
+  
+  
   rtl_tcp &> /dev/null &
   sleep 10 #Let rtl_tcp startup and open a port
 
   rtlamr -msgtype=r900
   exit 0
 fi
+
 
 # Setup for Metric/CCF
 UNIT_DIVISOR=10000
@@ -45,6 +47,7 @@ while true; do
     # Currently uses a GET request
     curl -L "$CURL_API$consumption"
   fi
+
 
   kill $rtl_tcp_pid # rtl_tcp has a memory leak and hangs after frequent use, restarts required - https://github.com/bemasher/rtlamr/issues/49
   sleep 60 # I don't need THAT many updates

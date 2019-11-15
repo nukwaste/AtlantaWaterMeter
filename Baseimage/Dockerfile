@@ -2,6 +2,7 @@ FROM resin/rpi-raspbian:jessie
 
 MAINTAINER Mark Percival
 # Credit to Frederik Granna for this base image
+# new code supports gas meters too
 
 RUN apt-get update && \
     apt-get install -y libusb-1.0-0-dev pkg-config ca-certificates git-core cmake build-essential --no-install-recommends && \
