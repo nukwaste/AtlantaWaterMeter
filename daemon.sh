@@ -45,7 +45,7 @@ while true; do
     echo "Logging to custom API"
     # For example, CURL_API would be "https://mylogger.herokuapp.com?value="
     # Currently uses a GET request
-    curl -L "$CURL_API$consumption"
+    curl -L "$CURL_API$json"
   fi
 
 
